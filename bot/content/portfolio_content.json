@@ -1,0 +1,96 @@
+{
+  "ru": {
+    "labels": {
+      "menu.about": "Обо мне",
+      "menu.skills": "Навыки",
+      "menu.experience": "Опыт",
+      "menu.availability": "Доступность",
+      "menu.contact": "Контакт",
+      "menu.ask": "Задать вопрос",
+      "menu.cv": "CV",
+      "menu.home": "Главное меню",
+      "menu.cancel": "Отмена",
+      "menu.language": "Язык",
+      "contact.confirm": "Подтвердить",
+      "contact.edit": "Заполнить заново"
+    },
+    "answers": {
+      "about": "Катя Димитрова — студентка Business and Administration с практическим опытом в сервисе, производственных процессах и работе с людьми.",
+      "skills": "Сильные стороны: коммуникация, адаптивность, внимание к деталям, CRM и учетные системы, производственная документация, контроль качества. Языки: русский, румынский, английский.",
+      "experience": "Опыт: бармен и специалист по сервису с 2024 года, раньше — оператор кабельного производства в Fujikura. Есть опыт гостеприимства, работы с кассой, качеством и отчетностью.",
+      "availability": "Открыта к стажировкам, assistant roles, client service и operations support. Ищет роли, где можно расти в администрировании, менеджменте и customer experience.",
+      "cv": "CV пока недоступно как файл, но бот и сайт уже дают краткий профиль, опыт, навыки и контактные данные.",
+      "contact": "Можно написать через этот бот, на email dimitrushkakaty@gmail.com или позвонить по номеру +373 69 250 320."
+    },
+    "prompts": {
+      "welcome": "Я помогу быстро узнать о Кате больше. Выберите раздел ниже или задайте вопрос.",
+      "menu": "Главное меню. Можете выбрать раздел или написать вопрос своими словами.",
+      "help": "Команды: /start, /menu, /language, /contact, /cancel, /help",
+      "faq.ask": "Напишите вопрос о навыках, опыте, доступности, языках или контактах.",
+      "faq.fallback": "Пока не нашла точный ответ на этот вопрос. Попробуйте раздел меню или переформулируйте вопрос.",
+      "flow.cancelled": "Текущий сценарий отменен.",
+      "contact.ask_name": "Как вас зовут?",
+      "contact.ask_company": "Укажите компанию, роль или сферу.",
+      "contact.ask_contact": "Какой способ связи вам удобен?",
+      "contact.ask_reason": "Коротко опишите причину обращения.",
+      "contact.summary": "Проверьте данные:\\n\\nИмя: {full_name}\\nКомпания/роль: {company_or_role}\\nСпособ связи: {preferred_contact}\\nПричина: {reason_for_contact}",
+      "contact.submitted": "Спасибо. Заявка сохранена, и Катя получит уведомление.",
+      "contact.retry": "Используйте кнопки ниже или завершите текущий шаг."
+    },
+    "faq": [
+      { "key": "about", "keywords": ["кто", "профиль", "обо мне", "katya", "катя"], "answer_key": "about" },
+      { "key": "skills", "keywords": ["навыки", "skills", "crm", "языки", "languages"], "answer_key": "skills" },
+      { "key": "experience", "keywords": ["опыт", "experience", "работа", "fujikura", "бармен"], "answer_key": "experience" },
+      { "key": "availability", "keywords": ["доступность", "internship", "стажировка", "open", "availability"], "answer_key": "availability" },
+      { "key": "cv", "keywords": ["cv", "резюме", "resume"], "answer_key": "cv" },
+      { "key": "contact", "keywords": ["контакт", "email", "почта", "phone", "телефон"], "answer_key": "contact" }
+    ]
+  },
+  "en": {
+    "labels": {
+      "menu.about": "About",
+      "menu.skills": "Skills",
+      "menu.experience": "Experience",
+      "menu.availability": "Availability",
+      "menu.contact": "Contact",
+      "menu.ask": "Ask a question",
+      "menu.cv": "CV",
+      "menu.home": "Main menu",
+      "menu.cancel": "Cancel",
+      "menu.language": "Language",
+      "contact.confirm": "Confirm",
+      "contact.edit": "Start over"
+    },
+    "answers": {
+      "about": "Katya Dimitrova is a Business and Administration student with practical experience in service, production processes, and people-facing work.",
+      "skills": "Core strengths: communication, adaptability, attention to detail, CRM and accounting systems, production documentation, and quality control. Languages: Russian, Romanian, and English.",
+      "experience": "Experience includes bartending and service work since 2024, plus earlier cable production work at Fujikura. Her background covers hospitality, POS operations, quality control, and reporting.",
+      "availability": "She is open to internships, assistant roles, client service, and operations support opportunities where she can grow in administration, management, and customer experience.",
+      "cv": "A downloadable CV is not available yet, but the bot and website already cover her profile, experience, skills, and contact details.",
+      "contact": "You can use this bot, email dimitrushkakaty@gmail.com, or call +373 69 250 320."
+    },
+    "prompts": {
+      "welcome": "I can help you learn more about Katya quickly. Choose a section below or ask a question.",
+      "menu": "Main menu. Choose a section or type your question.",
+      "help": "Commands: /start, /menu, /language, /contact, /cancel, /help",
+      "faq.ask": "Ask about skills, experience, availability, languages, or contact details.",
+      "faq.fallback": "I do not have a precise answer for that yet. Try a menu section or rephrase your question.",
+      "flow.cancelled": "The current flow has been cancelled.",
+      "contact.ask_name": "What is your full name?",
+      "contact.ask_company": "What company, role, or area are you reaching out from?",
+      "contact.ask_contact": "What is your preferred contact method?",
+      "contact.ask_reason": "Briefly describe your reason for contacting Katya.",
+      "contact.summary": "Please confirm your details:\\n\\nName: {full_name}\\nCompany/Role: {company_or_role}\\nPreferred Contact: {preferred_contact}\\nReason: {reason_for_contact}",
+      "contact.submitted": "Thank you. Your message has been saved and Katya will receive a notification.",
+      "contact.retry": "Use the buttons below or finish the current step."
+    },
+    "faq": [
+      { "key": "about", "keywords": ["who", "about", "profile", "katya"], "answer_key": "about" },
+      { "key": "skills", "keywords": ["skills", "languages", "crm", "quality", "documentation"], "answer_key": "skills" },
+      { "key": "experience", "keywords": ["experience", "work", "fujikura", "bartender", "service"], "answer_key": "experience" },
+      { "key": "availability", "keywords": ["availability", "internship", "open", "opportunity"], "answer_key": "availability" },
+      { "key": "cv", "keywords": ["cv", "resume"], "answer_key": "cv" },
+      { "key": "contact", "keywords": ["contact", "email", "phone", "reach"], "answer_key": "contact" }
+    ]
+  }
+}
