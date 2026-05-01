@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Katya Dimitrova | Business Administration Portfolio</title>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg: #f4f1ea;
+            --bg-soft: #ebe6dc;
+            --surface: #fffaf0;
+            --surface-strong: #171513;
+            --text: #171513;
+            --muted: #696057;
+            --accent: #b4542d;
+            --accent-strong: #7c2f19;
+            --border: rgba(23, 21, 19, 0.13);
+            --elevated: rgba(255, 250, 240, 0.82);
+            --shadow: 0 28px 80px rgba(69, 45, 28, 0.16);
+            --nav: rgba(244, 241, 234, 0.76);
+        }
+
+        html[data-theme="dark"] {
+            --bg: #11100e;
+            --bg-soft: #1b1916;
+            --surface: #201d19;
+            --surface-strong: #f7f0e4;
+            --text: #f7f0e4;
+            --muted: #b7ab9d;
+            --accent: #e2a15f;
+            --accent-strong: #ffd8a8;
+            --border: rgba(247, 240, 228, 0.14);
+            --elevated: rgba(32, 29, 25, 0.82);
+            --shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+            --nav: rgba(17, 16, 14, 0.78);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 30%),
+                radial-gradient(circle at 88% 14%, rgba(48, 78, 71, 0.16), transparent 32%),
+                linear-gradient(135deg, var(--bg) 0%, var(--bg-soft) 48%, var(--bg) 100%);
+            color: var(--text);
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            transition: background-color 240ms ease, color 240ms ease;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(120deg, transparent 0%, color-mix(in srgb, var(--surface) 58%, transparent) 46%, transparent 72%),
+                radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--surface) 72%, transparent), transparent 58%);
+            opacity: 0.72;
+            z-index: -1;
+        }
+
+        a, button {
+            color: inherit;
+        }
+
+        .font-display {
+            font-family: "Playfair Display", Georgia, serif;
+        }
+
+        .site-shell {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .nav {
+            background: var(--nav);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(18px);
+        }
+
+        .nav-link {
+            color: var(--muted);
+            transition: color 180ms ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+        }
+
+        .control {
+            min-height: 42px;
+            border: 1px solid var(--border);
+            background: var(--elevated);
+            color: var(--text);
+            transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+        }
+
+        .control:hover {
+            border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+            transform: translateY(-1px);
+        }
+
+        .language-button.active {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        .hero {
+            min-height: 100svh;
+            padding-top: 118px;
+            display: grid;
+            align-items: center;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            letter-spacing: 0.18em;
+        }
+
+        .hero-title {
+            max-width: 960px;
+            font-size: clamp(4rem, 12vw, 10.5rem);
+            line-height: 0.86;
+            letter-spacing: 0;
+        }
+
+        .hero-subtitle {
+            color: var(--muted);
+            font-size: clamp(1rem, 2.2vw, 1.35rem);
+        }
+
+        .portrait-card {
+            position: relative;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            background: var(--surface);
+            transition: transform 260ms ease, box-shadow 260ms ease;
+        }
+
+        .portrait-card::before {
+            content: "";
+            position: absolute;
+            inset: 12px;
+            z-index: 1;
+            pointer-events: none;
+            border: 1px solid color-mix(in srgb, var(--surface-strong) 28%, transparent);
+            border-radius: 1.45rem;
+            mix-blend-mode: soft-light;
+        }
+
+        .portrait-card:hover {
+            transform: translateY(-4px) rotate(-0.4deg);
+        }
+
+        .portrait-card img {
+            filter: saturate(0.92) contrast(1.08) sepia(0.08);
+            transition: transform 700ms ease, filter 240ms ease;
+        }
+
+        .portrait-card:hover img {
+            transform: scale(1.035);
+            filter: saturate(1.02) contrast(1.1) sepia(0.04);
+        }
+
+        .portrait-label {
+            background: var(--surface-strong);
+            color: var(--bg);
+        }
+
+        .section {
+            padding: clamp(72px, 10vw, 128px) 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-kicker {
+            color: var(--accent);
+            letter-spacing: 0.16em;
+        }
+
+        .panel {
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .surface {
+            background: var(--surface);
+            border: 1px solid var(--border);
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .accent {
+            color: var(--accent);
+        }
+
+        .cta {
+            background: var(--text);
+            color: var(--bg);
+            transition: transform 180ms ease, opacity 180ms ease;
+        }
+
+        .cta:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .ghost-cta {
+            border: 1px solid var(--border);
+            color: var(--text);
+            transition: transform 180ms ease, border-color 180ms ease;
+        }
+
+        .ghost-cta:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .disabled-cta {
+            border: 1px dashed color-mix(in srgb, var(--accent) 48%, var(--border));
+            background: color-mix(in srgb, var(--surface) 78%, transparent);
+            color: var(--muted);
+            cursor: not-allowed;
+        }
+
+        .disabled-cta i {
+            color: var(--accent);
+        }
+
+        .principle-card {
+            min-height: 260px;
+            transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-6px);
+            border-color: color-mix(in srgb, var(--accent) 44%, var(--border));
+        }
+
+        .principle-number {
+            color: color-mix(in srgb, var(--accent) 78%, var(--muted));
+        }
+
+        .proof-band {
+            background: var(--surface-strong);
+            color: var(--bg);
+            box-shadow: var(--shadow);
+        }
+
+        .proof-item {
+            border-color: color-mix(in srgb, var(--bg) 22%, transparent);
+            transition: transform 220ms ease, background-color 220ms ease;
+        }
+
+        .proof-item:hover {
+            transform: translateY(-4px);
+            background: color-mix(in srgb, var(--bg) 8%, transparent);
+        }
+
+        .proof-item .muted {
+            color: color-mix(in srgb, var(--bg) 72%, transparent);
+        }
+
+        .skill-pill {
+            background: color-mix(in srgb, var(--accent) 10%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+            color: var(--text);
+        }
+
+        .timeline-line {
+            background: var(--border);
+        }
+
+        .timeline-dot {
+            background: var(--accent);
+            box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 16%, transparent);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 760ms ease, transform 760ms ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hero {
+                min-height: auto;
+                padding-top: 104px;
+                padding-bottom: 56px;
+            }
+
+            .site-shell {
+                width: min(100% - 24px, 1180px);
+            }
+
+            .hero-title {
+                font-size: clamp(3.4rem, 21vw, 5.5rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav fixed inset-x-0 top-0 z-50">
+        <div class="site-shell flex min-h-20 items-center justify-between gap-4 py-3">
+            <a href="#top" class="flex items-center gap-3" aria-label="Katya Dimitrova">
+                <span class="flex h-11 w-11 items-center justify-center rounded-full border text-sm font-bold" style="border-color: var(--border); background: var(--surface);">KD</span>
+                <span class="hidden text-sm font-semibold uppercase tracking-[0.22em] sm:inline">Katya</span>
+            </a>
+
+            <div class="hidden items-center gap-8 text-sm font-semibold md:flex">
+                <a class="nav-link" href="#about" data-i18n="nav.about">Обо мне</a>
+                <a class="nav-link" href="#skills" data-i18n="nav.skills">Навыки</a>
+                <a class="nav-link" href="#experience" data-i18n="nav.experience">Опыт</a>
+                <a class="nav-link" href="#contacts" data-i18n="nav.contacts">Контакты</a>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <div class="control flex rounded-full p-1" aria-label="Language switcher">
+                    <button class="language-button rounded-full px-3 py-2 text-xs font-bold" type="button" data-lang="ru">RU</button>
+                    <button class="language-button rounded-full px-3 py-2 text-xs font-bold" type="button" data-lang="en">EN</button>
+                </div>
+                <button id="themeToggle" class="control flex h-11 w-11 items-center justify-center rounded-full" type="button" aria-label="Toggle theme">
+                    <i data-lucide="moon" class="h-5 w-5"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="top">
+        <header class="hero">
+            <div class="site-shell grid gap-12 lg:grid-cols-[1fr_360px] lg:items-end">
+                <div class="reveal">
+                    <p class="eyebrow mb-6 text-xs font-extrabold uppercase" data-i18n="hero.kicker">Бизнес-администрирование / сервис / операции</p>
+                    <h1 class="hero-title font-display font-extrabold">Katya<br>Dimitrova</h1>
+                    <p class="hero-subtitle mt-8 max-w-2xl font-medium" data-i18n="hero.subtitle">Начинающий специалист в бизнес-администрировании с реальным опытом сервиса, производственных процессов и работы с людьми.</p>
+                    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+                        <a href="#contacts" class="cta inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold" data-i18n="hero.cta">Связаться</a>
+                        <a href="#experience" class="ghost-cta inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold" data-i18n="hero.secondary">Смотреть опыт</a>
+                        <button type="button" class="disabled-cta inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-bold" aria-disabled="true" disabled>
+                            <i data-lucide="file-clock" class="h-4 w-4"></i>
+                            <span data-i18n="hero.cv">CV скоро</span>
+                        </button>
+                    </div>
+                </div>
+
+                <aside class="portrait-card reveal overflow-hidden rounded-[2rem] p-3 lg:mb-4">
+                    <div class="relative aspect-[4/5] overflow-hidden rounded-[1.45rem]">
+                        <img
+                            src="https://i.postimg.cc/nc3y15kz/photo-5426877743745406093-w.jpg"
+                            alt="Katya Dimitrova"
+                            class="h-full w-full object-cover"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        >
+                        <div class="hidden h-full w-full items-center justify-center" style="background: var(--bg-soft);">
+                            <i data-lucide="user" class="h-16 w-16 muted"></i>
+                        </div>
+                        <div class="portrait-label absolute bottom-4 left-4 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.18em]" data-i18n="hero.badge">Открыта к стажировкам</div>
+                    </div>
+                </aside>
+            </div>
+        </header>
+
+        <section id="about" class="section">
+            <div class="site-shell grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+                <div class="reveal">
+                    <p class="section-kicker mb-4 text-xs font-extrabold uppercase" data-i18n="about.kicker">Профиль</p>
+                    <h2 class="font-display text-4xl font-extrabold leading-tight md:text-6xl" data-i18n="about.title">Спокойная энергия для команд, процессов и сервиса.</h2>
+                </div>
+
+                <div class="grid gap-4 md:grid-cols-3">
+                    <article class="surface reveal rounded-2xl p-6">
+                        <i data-lucide="graduation-cap" class="accent mb-8 h-7 w-7"></i>
+                        <h3 class="mb-3 text-lg font-extrabold" data-i18n="about.education.title">Обучение</h3>
+                        <p class="muted text-sm leading-7" data-i18n="about.education.text">Студентка U.S.M. по специальности Business and Administration в Кишинёве. Изучает менеджмент, маркетинг и основы управления.</p>
+                    </article>
+
+                    <article class="surface reveal rounded-2xl p-6">
+                        <i data-lucide="target" class="accent mb-8 h-7 w-7"></i>
+                        <h3 class="mb-3 text-lg font-extrabold" data-i18n="about.focus.title">Фокус</h3>
+                        <p class="muted text-sm leading-7" data-i18n="about.focus.text">Интересуется операционным менеджментом, развитием клиентского опыта и деловой коммуникацией.</p>
+                    </article>
+
+                    <article class="surface reveal rounded-2xl p-6">
+                        <i data-lucide="sparkles" class="accent mb-8 h-7 w-7"></i>
+                        <h3 class="mb-3 text-lg font-extrabold" data-i18n="about.edge.title">Сильная сторона</h3>
+                        <p class="muted text-sm leading-7" data-i18n="about.edge.text">Быстро адаптируется, держит внимание к деталям и умеет работать с людьми в динамичной среде.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="approach" class="section">
+            <div class="site-shell">
+                <div class="mb-12 grid gap-6 lg:grid-cols-[0.75fr_1fr] lg:items-end">
+                    <div class="reveal">
+                        <p class="section-kicker mb-4 text-xs font-extrabold uppercase" data-i18n="approach.kicker">Как я работаю</p>
+                        <h2 class="font-display text-4xl font-extrabold leading-tight md:text-6xl" data-i18n="approach.title">Порядок, внимание и спокойная коммуникация.</h2>
+                    </div>
+                    <p class="muted reveal max-w-2xl text-base leading-8" data-i18n="approach.text">Её опыт в сервисе и производстве помогает видеть работу с двух сторон: как систему процессов и как ежедневный контакт с людьми.</p>
+                </div>
+
+                <div class="grid gap-4 md:grid-cols-3">
+                    <article class="principle-card surface reveal rounded-3xl p-6 md:p-8">
+                        <p class="principle-number mb-10 font-display text-6xl font-extrabold">01</p>
+                        <h3 class="mb-4 text-2xl font-extrabold" data-i18n="approach.clarity.title">Ясность</h3>
+                        <p class="muted leading-8" data-i18n="approach.clarity.text">Сначала понять задачу, затем держать процесс простым, измеримым и понятным для команды.</p>
+                    </article>
+
+                    <article class="principle-card surface reveal rounded-3xl p-6 md:p-8">
+                        <p class="principle-number mb-10 font-display text-6xl font-extrabold">02</p>
+                        <h3 class="mb-4 text-2xl font-extrabold" data-i18n="approach.responsibility.title">Ответственность</h3>
+                        <p class="muted leading-8" data-i18n="approach.responsibility.text">Внимание к деталям, аккуратность в документации и уважение к стандартам качества.</p>
+                    </article>
+
+                    <article class="principle-card surface reveal rounded-3xl p-6 md:p-8">
+                        <p class="principle-number mb-10 font-display text-6xl font-extrabold">03</p>
+                        <h3 class="mb-4 text-2xl font-extrabold" data-i18n="approach.communication.title">Коммуникация</h3>
+                        <p class="muted leading-8" data-i18n="approach.communication.text">Спокойный тон, быстрая адаптация и умение работать с людьми даже в напряжённом ритме.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="site-shell">
+                <div class="proof-band reveal rounded-[2rem] p-6 md:p-10">
+                    <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+                        <div>
+                            <p class="mb-3 text-xs font-extrabold uppercase tracking-[0.16em]" style="color: var(--accent);" data-i18n="proof.kicker">Доказательства</p>
+                            <h2 class="font-display text-4xl font-extrabold md:text-5xl" data-i18n="proof.title">Факты, которые уже можно проверить.</h2>
+                        </div>
+                        <p class="muted max-w-md leading-8" data-i18n="proof.text">Без лишних обещаний: только то, что уже есть в опыте, навыках и рабочих результатах.</p>
+                    </div>
+
+                    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                        <div class="proof-item rounded-2xl border p-5">
+                            <p class="font-display text-4xl font-extrabold">110-120%</p>
+                            <p class="muted mt-3 text-sm font-semibold" data-i18n="proof.plan">выполнение производственного плана</p>
+                        </div>
+                        <div class="proof-item rounded-2xl border p-5">
+                            <p class="font-display text-4xl font-extrabold">CRM/POS</p>
+                            <p class="muted mt-3 text-sm font-semibold" data-i18n="proof.tools">iiko, R-Keeper и кассовые системы</p>
+                        </div>
+                        <div class="proof-item rounded-2xl border p-5">
+                            <p class="font-display text-4xl font-extrabold">3</p>
+                            <p class="muted mt-3 text-sm font-semibold" data-i18n="proof.languages">рабочих языка</p>
+                        </div>
+                        <div class="proof-item rounded-2xl border p-5">
+                            <p class="font-display text-4xl font-extrabold">2</p>
+                            <p class="muted mt-3 text-sm font-semibold" data-i18n="proof.fields">сферы: сервис и производство</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="site-shell">
+                <div class="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+                    <div class="reveal">
+                        <p class="section-kicker mb-4 text-xs font-extrabold uppercase" data-i18n="skills.kicker">Навыки</p>
+                        <h2 class="font-display text-4xl font-extrabold md:text-6xl" data-i18n="skills.title">Практичные навыки для реальной работы.</h2>
+                    </div>
+                    <p class="muted reveal max-w-md text-base leading-8" data-i18n="skills.note">Баланс системного мышления, сервиса и коммуникации: то, что помогает командам работать точнее.</p>
+                </div>
+
+                <div class="grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+                    <div class="panel reveal rounded-3xl p-5 md:p-8">
+                        <h3 class="mb-6 text-sm font-extrabold uppercase tracking-[0.18em]" data-i18n="skills.hard">Hard skills</h3>
+                        <div class="grid gap-3 sm:grid-cols-2">
+                            <div class="surface rounded-2xl p-5">
+                                <i data-lucide="monitor-check" class="accent mb-5 h-6 w-6"></i>
+                                <p class="font-bold" data-i18n="skills.crm">CRM и системы учёта: iiko, R-Keeper</p>
+                            </div>
+                            <div class="surface rounded-2xl p-5">
+                                <i data-lucide="file-text" class="accent mb-5 h-6 w-6"></i>
+                                <p class="font-bold" data-i18n="skills.docs">Производственная документация</p>
+                            </div>
+                            <div class="surface rounded-2xl p-5">
+                                <i data-lucide="badge-check" class="accent mb-5 h-6 w-6"></i>
+                                <p class="font-bold" data-i18n="skills.quality">Контроль качества и ISO-подход</p>
+                            </div>
+                            <div class="surface rounded-2xl p-5">
+                                <i data-lucide="languages" class="accent mb-5 h-6 w-6"></i>
+                                <p class="font-bold" data-i18n="skills.languages">Русский, румынский, английский</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="surface reveal rounded-3xl p-5 md:p-8">
+                        <h3 class="mb-6 text-sm font-extrabold uppercase tracking-[0.18em]" data-i18n="skills.soft">Soft skills</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-pill rounded-full px-4 py-2 text-sm font-bold" data-i18n="skills.soft1">Многозадачность</span>
+                            <span class="skill-pill rounded-full px-4 py-2 text-sm font-bold" data-i18n="skills.soft2">Стрессоустойчивость</span>
+                            <span class="skill-pill rounded-full px-4 py-2 text-sm font-bold" data-i18n="skills.soft3">Коммуникабельность</span>
+                            <span class="skill-pill rounded-full px-4 py-2 text-sm font-bold" data-i18n="skills.soft4">Адаптивность</span>
+                            <span class="skill-pill rounded-full px-4 py-2 text-sm font-bold" data-i18n="skills.soft5">Внимательность</span>
+                            <span class="skill-pill rounded-full px-4 py-2 text-sm font-bold" data-i18n="skills.soft6">Креативность</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <div class="site-shell">
+                <div class="reveal mb-14 max-w-3xl">
+                    <p class="section-kicker mb-4 text-xs font-extrabold uppercase" data-i18n="experience.kicker">Опыт</p>
+                    <h2 class="font-display text-4xl font-extrabold md:text-6xl" data-i18n="experience.title">Работа, где важны скорость, точность и люди.</h2>
+                </div>
+
+                <div class="relative grid gap-8">
+                    <div class="timeline-line absolute bottom-0 left-3 top-0 hidden w-px md:block"></div>
+
+                    <article class="reveal grid gap-5 md:grid-cols-[180px_1fr] md:pl-10">
+                        <div class="relative">
+                            <span class="timeline-dot absolute -left-10 top-2 hidden h-3 w-3 rounded-full md:block"></span>
+                            <p class="accent text-sm font-extrabold uppercase tracking-[0.16em]" data-i18n="experience.first.date">2024 — сейчас</p>
+                            <p class="muted mt-2 text-sm">Zoom Cherdak</p>
+                        </div>
+                        <div class="surface rounded-3xl p-6 md:p-8">
+                            <h3 class="mb-3 text-2xl font-extrabold" data-i18n="experience.first.role">Бармен / специалист по сервису</h3>
+                            <p class="muted leading-8" data-i18n="experience.first.text">Отвечает за гостеприимство, управление запасами, кассовые системы и стабильное качество клиентского опыта.</p>
+                            <div class="mt-6 rounded-2xl p-5" style="background: color-mix(in srgb, var(--accent) 10%, transparent);">
+                                <p class="mb-2 text-sm font-extrabold uppercase tracking-[0.14em]" data-i18n="experience.achievement">Ключевое достижение</p>
+                                <p class="muted text-sm leading-7" data-i18n="experience.first.achievement">Участвовала в создании авторских позиций, поддерживала высокий уровень сервиса и помогала новым сотрудникам быстрее включаться в работу.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="reveal grid gap-5 md:grid-cols-[180px_1fr] md:pl-10">
+                        <div class="relative">
+                            <span class="timeline-dot absolute -left-10 top-2 hidden h-3 w-3 rounded-full md:block"></span>
+                            <p class="accent text-sm font-extrabold uppercase tracking-[0.16em]">2023</p>
+                            <p class="muted mt-2 text-sm">Fujikura</p>
+                        </div>
+                        <div class="surface rounded-3xl p-6 md:p-8">
+                            <h3 class="mb-3 text-2xl font-extrabold" data-i18n="experience.second.role">Оператор кабельного производства</h3>
+                            <p class="muted leading-8" data-i18n="experience.second.text">Работала с технологическими картами, контролем качества продукции и производственной отчётностью.</p>
+                            <div class="mt-6 rounded-2xl p-5" style="background: color-mix(in srgb, var(--accent) 10%, transparent);">
+                                <p class="mb-2 text-sm font-extrabold uppercase tracking-[0.14em]" data-i18n="experience.achievement">Ключевое достижение</p>
+                                <p class="muted text-sm leading-7" data-i18n="experience.second.achievement">Выполняла план на 110-120% без брака и помогала оптимизировать время переналадки оборудования.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacts" class="section pb-10">
+            <div class="site-shell">
+                <div class="panel reveal rounded-[2rem] p-6 md:p-12">
+                    <div class="grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-end">
+                        <div>
+                            <p class="section-kicker mb-4 text-xs font-extrabold uppercase" data-i18n="contact.kicker">Контакты</p>
+                            <h2 class="font-display text-4xl font-extrabold leading-tight md:text-6xl" data-i18n="contact.title">Готова к стажировке, роли ассистента или позиции в сервисе.</h2>
+                            <p class="muted mt-6 max-w-2xl leading-8" data-i18n="contact.text">Открыта к командам, где можно развивать навыки администрирования, менеджмента и клиентского опыта.</p>
+                            <button type="button" class="disabled-cta mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-bold" aria-disabled="true" disabled>
+                                <i data-lucide="file-clock" class="h-4 w-4"></i>
+                                <span data-i18n="contact.cv">CV скоро будет доступно</span>
+                            </button>
+                        </div>
+
+                        <div class="grid gap-3">
+                            <a href="mailto:dimitrushkakaty@gmail.com" class="surface flex min-h-20 items-center gap-4 rounded-2xl p-5 transition hover:-translate-y-1">
+                                <i data-lucide="mail" class="accent h-6 w-6 shrink-0"></i>
+                                <span>
+                                    <span class="muted block text-xs font-bold uppercase tracking-[0.16em]">Email</span>
+                                    <span class="break-all font-extrabold">dimitrushkakaty@gmail.com</span>
+                                </span>
+                            </a>
+                            <a href="tel:+37369250320" class="surface flex min-h-20 items-center gap-4 rounded-2xl p-5 transition hover:-translate-y-1">
+                                <i data-lucide="phone" class="accent h-6 w-6 shrink-0"></i>
+                                <span>
+                                    <span class="muted block text-xs font-bold uppercase tracking-[0.16em]" data-i18n="contact.phone">Телефон</span>
+                                    <span class="font-extrabold">+373 69 250 320</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="flex flex-col justify-between gap-3 py-8 text-sm md:flex-row md:items-center">
+                    <p class="muted" data-i18n="footer.copy">© 2026 Katya Dimitrova. Сделано с вниманием к деталям.</p>
+                    <a href="#top" class="accent font-extrabold" data-i18n="footer.top">Наверх</a>
+                </footer>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const translations = {
+            ru: {
+                "nav.about": "Обо мне",
+                "nav.skills": "Навыки",
+                "nav.experience": "Опыт",
+                "nav.contacts": "Контакты",
+                "hero.kicker": "Бизнес-администрирование / сервис / операции",
+                "hero.subtitle": "Начинающий специалист в бизнес-администрировании с реальным опытом сервиса, производственных процессов и работы с людьми.",
+                "hero.cta": "Связаться",
+                "hero.secondary": "Смотреть опыт",
+                "hero.cv": "CV скоро",
+                "hero.badge": "Открыта к стажировкам",
+                "about.kicker": "Профиль",
+                "about.title": "Спокойная энергия для команд, процессов и сервиса.",
+                "about.education.title": "Обучение",
+                "about.education.text": "Студентка U.S.M. по специальности Business and Administration в Кишинёве. Изучает менеджмент, маркетинг и основы управления.",
+                "about.focus.title": "Фокус",
+                "about.focus.text": "Интересуется операционным менеджментом, развитием клиентского опыта и деловой коммуникацией.",
+                "about.edge.title": "Сильная сторона",
+                "about.edge.text": "Быстро адаптируется, держит внимание к деталям и умеет работать с людьми в динамичной среде.",
+                "approach.kicker": "Как я работаю",
+                "approach.title": "Порядок, внимание и спокойная коммуникация.",
+                "approach.text": "Её опыт в сервисе и производстве помогает видеть работу с двух сторон: как систему процессов и как ежедневный контакт с людьми.",
+                "approach.clarity.title": "Ясность",
+                "approach.clarity.text": "Сначала понять задачу, затем держать процесс простым, измеримым и понятным для команды.",
+                "approach.responsibility.title": "Ответственность",
+                "approach.responsibility.text": "Внимание к деталям, аккуратность в документации и уважение к стандартам качества.",
+                "approach.communication.title": "Коммуникация",
+                "approach.communication.text": "Спокойный тон, быстрая адаптация и умение работать с людьми даже в напряжённом ритме.",
+                "proof.kicker": "Доказательства",
+                "proof.title": "Факты, которые уже можно проверить.",
+                "proof.text": "Без лишних обещаний: только то, что уже есть в опыте, навыках и рабочих результатах.",
+                "proof.plan": "выполнение производственного плана",
+                "proof.tools": "iiko, R-Keeper и кассовые системы",
+                "proof.languages": "рабочих языка",
+                "proof.fields": "сферы: сервис и производство",
+                "skills.kicker": "Навыки",
+                "skills.title": "Практичные навыки для реальной работы.",
+                "skills.note": "Баланс системного мышления, сервиса и коммуникации: то, что помогает командам работать точнее.",
+                "skills.hard": "Hard skills",
+                "skills.crm": "CRM и системы учёта: iiko, R-Keeper",
+                "skills.docs": "Производственная документация",
+                "skills.quality": "Контроль качества и ISO-подход",
+                "skills.languages": "Русский, румынский, английский",
+                "skills.soft": "Soft skills",
+                "skills.soft1": "Многозадачность",
+                "skills.soft2": "Стрессоустойчивость",
+                "skills.soft3": "Коммуникабельность",
+                "skills.soft4": "Адаптивность",
+                "skills.soft5": "Внимательность",
+                "skills.soft6": "Креативность",
+                "experience.kicker": "Опыт",
+                "experience.title": "Работа, где важны скорость, точность и люди.",
+                "experience.first.date": "2024 — сейчас",
+                "experience.first.role": "Бармен / специалист по сервису",
+                "experience.first.text": "Отвечает за гостеприимство, управление запасами, кассовые системы и стабильное качество клиентского опыта.",
+                "experience.achievement": "Ключевое достижение",
+                "experience.first.achievement": "Участвовала в создании авторских позиций, поддерживала высокий уровень сервиса и помогала новым сотрудникам быстрее включаться в работу.",
+                "experience.second.role": "Оператор кабельного производства",
+                "experience.second.text": "Работала с технологическими картами, контролем качества продукции и производственной отчётностью.",
+                "experience.second.achievement": "Выполняла план на 110-120% без брака и помогала оптимизировать время переналадки оборудования.",
+                "contact.kicker": "Контакты",
+                "contact.title": "Готова к стажировке, роли ассистента или позиции в сервисе.",
+                "contact.text": "Открыта к командам, где можно развивать навыки администрирования, менеджмента и клиентского опыта.",
+                "contact.cv": "CV скоро будет доступно",
+                "contact.phone": "Телефон",
+                "footer.copy": "© 2026 Katya Dimitrova. Сделано с вниманием к деталям.",
+                "footer.top": "Наверх"
+            },
+            en: {
+                "nav.about": "About",
+                "nav.skills": "Skills",
+                "nav.experience": "Experience",
+                "nav.contacts": "Contact",
+                "hero.kicker": "Business administration / service / operations",
+                "hero.subtitle": "An entry-level business administration candidate with real experience across service, production processes, and people-facing work.",
+                "hero.cta": "Contact me",
+                "hero.secondary": "View experience",
+                "hero.cv": "CV coming soon",
+                "hero.badge": "Open to internships",
+                "about.kicker": "Profile",
+                "about.title": "Calm energy for teams, processes, and service.",
+                "about.education.title": "Education",
+                "about.education.text": "Business and Administration student at U.S.M. in Chisinau, studying management, marketing, and the foundations of business operations.",
+                "about.focus.title": "Focus",
+                "about.focus.text": "Interested in operations management, customer experience development, and business communication.",
+                "about.edge.title": "Strength",
+                "about.edge.text": "Adapts quickly, keeps attention on details, and works well with people in dynamic environments.",
+                "approach.kicker": "How I work",
+                "approach.title": "Order, attention, and calm communication.",
+                "approach.text": "Her service and production experience helps her see work from two sides: as a system of processes and as daily contact with people.",
+                "approach.clarity.title": "Clarity",
+                "approach.clarity.text": "Understand the task first, then keep the process simple, measurable, and clear for the team.",
+                "approach.responsibility.title": "Responsibility",
+                "approach.responsibility.text": "Attention to detail, careful documentation, and respect for quality standards.",
+                "approach.communication.title": "Communication",
+                "approach.communication.text": "A calm tone, fast adaptation, and the ability to work with people even in a busy rhythm.",
+                "proof.kicker": "Proof",
+                "proof.title": "Facts that can already be checked.",
+                "proof.text": "No inflated promises: only what is already visible in her experience, skills, and work results.",
+                "proof.plan": "production plan completion",
+                "proof.tools": "iiko, R-Keeper, and POS systems",
+                "proof.languages": "working languages",
+                "proof.fields": "fields: service and production",
+                "skills.kicker": "Skills",
+                "skills.title": "Practical skills for real work.",
+                "skills.note": "A balance of systems thinking, service, and communication: the qualities that help teams work with more precision.",
+                "skills.hard": "Hard skills",
+                "skills.crm": "CRM and accounting systems: iiko, R-Keeper",
+                "skills.docs": "Production documentation",
+                "skills.quality": "Quality control and ISO-oriented standards",
+                "skills.languages": "Russian, Romanian, English",
+                "skills.soft": "Soft skills",
+                "skills.soft1": "Multitasking",
+                "skills.soft2": "Stress resilience",
+                "skills.soft3": "Communication",
+                "skills.soft4": "Adaptability",
+                "skills.soft5": "Attention to detail",
+                "skills.soft6": "Creativity",
+                "experience.kicker": "Experience",
+                "experience.title": "Work where speed, precision, and people matter.",
+                "experience.first.date": "2024 — present",
+                "experience.first.role": "Bartender / Service specialist",
+                "experience.first.text": "Responsible for hospitality, inventory, POS systems, and a consistently strong customer experience.",
+                "experience.achievement": "Key achievement",
+                "experience.first.achievement": "Contributed to signature menu items, supported a high service standard, and helped new employees onboard faster.",
+                "experience.second.role": "Cable production operator",
+                "experience.second.text": "Worked with technical process sheets, product quality control, and production reporting.",
+                "experience.second.achievement": "Reached 110-120% of production targets without defects and helped optimize equipment changeover time.",
+                "contact.kicker": "Contact",
+                "contact.title": "Ready for an internship, assistant role, or service position.",
+                "contact.text": "Open to teams where administration, management, and customer experience skills can grow through real responsibility.",
+                "contact.cv": "CV will be available soon",
+                "contact.phone": "Phone",
+                "footer.copy": "© 2026 Katya Dimitrova. Crafted with attention to detail.",
+                "footer.top": "Back to top"
+            }
+        };
+
+        const storageKeys = {
+            language: "katya-portfolio-language",
+            theme: "katya-portfolio-theme"
+        };
+
+        const languageButtons = document.querySelectorAll("[data-lang]");
+        const themeToggle = document.getElementById("themeToggle");
+
+        function applyLanguage(language) {
+            const dictionary = translations[language] || translations.ru;
+            document.documentElement.lang = language;
+
+            document.querySelectorAll("[data-i18n]").forEach((element) => {
+                const key = element.getAttribute("data-i18n");
+                if (dictionary[key]) {
+                    element.textContent = dictionary[key];
+                }
+            });
+
+            languageButtons.forEach((button) => {
+                const isActive = button.dataset.lang === language;
+                button.classList.toggle("active", isActive);
+                button.setAttribute("aria-pressed", String(isActive));
+            });
+
+            localStorage.setItem(storageKeys.language, language);
+        }
+
+        function getInitialTheme() {
+            const savedTheme = localStorage.getItem(storageKeys.theme);
+            if (savedTheme === "light" || savedTheme === "dark") {
+                return savedTheme;
+            }
+
+            return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.dataset.theme = theme;
+            localStorage.setItem(storageKeys.theme, theme);
+
+            themeToggle.innerHTML = `<i data-lucide="${theme === "dark" ? "sun" : "moon"}" class="h-5 w-5"></i>`;
+            themeToggle.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+            lucide.createIcons();
+        }
+
+        languageButtons.forEach((button) => {
+            button.addEventListener("click", () => applyLanguage(button.dataset.lang));
+        });
+
+        themeToggle.addEventListener("click", () => {
+            const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+            applyTheme(nextTheme);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.14 });
+
+        document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+        applyTheme(getInitialTheme());
+        applyLanguage(localStorage.getItem(storageKeys.language) || "ru");
+        lucide.createIcons();
+    </script>
+</body>
+</html>
