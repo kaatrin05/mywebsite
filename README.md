@@ -47,3 +47,29 @@ I am open to opportunities where I can continue developing in:
 ## Closing Note
 
 I believe good work is built on consistency, responsibility, and the ability to work well with people. This portfolio is a small introduction to that mindset.
+
+## Telegram Bot
+
+This repository also includes a local Python Telegram bot for the portfolio.
+
+Features:
+
+- bilingual RU/EN onboarding
+- menu-driven answers about profile, skills, experience, availability, and contact details
+- free-text FAQ matching
+- recruiter/contact lead collection flow
+- local JSON persistence for sessions and leads
+- Telegram admin notification for every submitted lead
+
+## Run Locally
+
+1. Create a virtual environment.
+2. Install dependencies from `requirements.txt`.
+3. Copy values into `.env`.
+4. Start the bot:
+
+```bash
+python -m bot
+```
+
+The bot stores runtime data under `./data` by default.
